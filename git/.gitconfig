@@ -1,0 +1,12 @@
+[user]
+	name = sang.duong
+	email = sang.duong@cake.vn
+	signingkey = DC5558145C778609
+[maintenance]
+	repo = /Users/sang.duong/Repos/znap
+[commit]
+	gpgsign = true
+[core]
+	autocrlf = input
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
