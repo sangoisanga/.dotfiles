@@ -1,95 +1,105 @@
-" COMMON  -------------------------------------------------------------- {{{
-execute pathogen#infect()
-syntax on
-set encoding=utf-8
-set hlsearch
-set incsearch
-set scrolloff=5
-set ignorecase
-set visualbell
-set number
-set smartcase
-set showmode
-set clipboard=unnamed
-set number
-set relativenumber
+source ~/.vimrc
 
-filetype on
-filetype plugin on
-filetype indent on
-autocmd BufWrite * set nobomb
+Plug 'terryma/vim-multiple-cursors'
 
-set nocompatible
-set smartindent
-set shiftwidth=4
-set tabstop=4
-set expandtab
-set nobackup
-set nowritebackup
-set showcmd
-set showmatch
-set history=1000
+set ideastrictmode
+set clipboard+=ideaput
 
-set wildmenu
-set wildmode=list:longest
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set ideamarks
+set ideajoin
+set idearefactormode=keep
+set surround
+set ReplaceWithRegister
+set exchange
 
-map H ^
-map L $
-inoremap jk <Esc>
-inoremap kj <Esc>
-nnoremap Q @q
+set highlightedyank
+let g:highlightedyank_highlight_duration = "1000"
 
-nnoremap vv V
-nnoremap V <C-V>$
+set argtextobj
+let g:argtextobj_pairs="[:],(:),<:>,{:},::,"
 
-" }}}
 
-" PLUGINS -------------------------------------------------------------- {{{
-call plug#begin('~/.vim/plugged')
- 	Plug 'preservim/nerdtree', { 'on': 'NERDTreeFocus' }
-	Plug 'chaoren/vim-wordmotion'
-	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-    Plug 'vim-airline/vim-airline'
+set NERDTree
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpParent='h'
 
-    Plug 'doums/darcula'
-call plug#end()
+set easymotion
+let g:EasyMotion_startofline = 0
+"map W <Plug>(easymotion-W)
+"sunmap W
 
-" backgroup stuff
-set background=dark
-colorscheme darcula
-set termguicolors
+nmap gi <Action>(GotoImplementation)
+nmap gt <Action>(GotoTypeDeclaration)
+nmap gs <Action>(GotoSuperMethod)
+nmap gh <Action>(CallHierarchy)
+nmap ga <Action>(SearchEverywhere)
+nmap gy <Action>(GotoSymbol)
+nmap gf <Action>(GotoFile)
 
-" Have nerdtree ignore certain files and directories.
-let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
-" }}}
+imap <C-j> <Action>(copilot.cycleNextInlays)
+imap <C-k> <Action>(copilot.cyclePrevInlays)
 
-" MAPPINGS -------------------------------------------------------------- {{{
-let mapleader=" "
-nnoremap Y y$
-nnoremap <leader>p :NERDTreeFocus<CR>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-" }}}
+map [[ <Action>(MethodUp)
+map ]] <Action>(MethodDown)
+nmap ]c <Action>(VcsShowNextChangeMarker)
+nmap [c <Action>(VcsShowPrevChangeMarker)
 
-" VIMSCRIPT -------------------------------------------------------------- {{{
-" If Vim version is equal to or greater than 7.3 enable undofile.
-" This allows you to undo changes to a file even after saving it.
-if version >= 703
-    set undodir=~/.vim/backup
-    set undofile
-    set undoreload=10000
-endif
+map w [w
+map e ]w
+map b [b
 
-" This will enable code folding.
-" Use the marker method of folding.
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
-" }}}
+map <leader>r <Action>(RenameElement)
+map <leader>o <Action>(FileStructurePopup)
+map <leader>e <Action>(SelectInProjectView)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+map <leader>m <Action>(ExtractMethod)
+map <leader>a <Action>(ShowIntentionActions)
 
-" BASE -------------------------------------------------------------- {{{
-" }}}
+map <leader>gu <Action>(Vcs.UpdateProject)
+map <leader>gh <Action>(Vcs.ShowHistoryForBlock)
+map <leader>gb <Action>(Git.Branches)
+map <leader>ga <Action>(Annotate)
+map <leader>gl <Action>(Vcs.Show.Log)
+map <leader>gn <Action>(GitNewBranchAction)
+map <leader>gk <Action>(CheckinProject)
+
+map <leader>pm <Action>(MergeAllWindowsAction)
+map <leader>pp <Action>(OpenProjectWindows)
+map <leader>pr <Action>($LRU)
+
+map > <Action>(EditorIndentSelection)
+map < <Action>(EditorUnindentSelection)
+
+map <leader>dd <Action>(RunClass)
+map <leader>db <Action>(DebugClass)
+map <leader>dr <Action>(Rerun)
+map <leader>ds <Action>(ToggleLineBreakpoint)
+
+vmap sf <Action>(ReformatCode)
+
+" moving
+nmap <s-j> <Action>(PreviousTab)
+nmap <s-k> <Action>(NextTab)
+map <s-Space> <Action>(GotoNextError)
+
+map <c-\> <Action>(MoveTabRight)
+map <c-]> <Action>(MoveEditorToOppositeTabGroup)
+map <c--> <Action>(SplitHorizontally)
+map <c-=> <Action>(UnsplitAll)
+
+nmap <c-x> <Action>(HideAllWindows)
+map <c-w>m <Action>(MaximizeEditorInSplit)
+
+map <c-o> <Action>(Back)
+map <c-i> <Action>(Forward)
+
+" multiple cursors
+map <C-n> <A-n>
+map <C-p> <A-p>
+
+map <leader>f <Plug>(easymotion-s)
+map <leader>i <Action>(AceDeclarationAction)
+
+nmap == <Action>(ReformatCode)
+
+nnoremap <Esc> <Esc>:noh<CR>
