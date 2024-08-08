@@ -6,7 +6,6 @@ set ideastrictmode
 set clipboard+=ideaput
 
 set ideamarks
-set easymotion
 set ideajoin
 set idearefactormode=keep
 set surround
@@ -24,6 +23,11 @@ set NERDTree
 let g:NERDTreeMapActivateNode='l'
 let g:NERDTreeMapJumpParent='h'
 
+set easymotion
+let g:EasyMotion_startofline = 0
+"map W <Plug>(easymotion-W)
+"sunmap W
+
 nmap gi <Action>(GotoImplementation)
 nmap gt <Action>(GotoTypeDeclaration)
 nmap gs <Action>(GotoSuperMethod)
@@ -31,6 +35,9 @@ nmap gh <Action>(CallHierarchy)
 nmap ga <Action>(SearchEverywhere)
 nmap gy <Action>(GotoSymbol)
 nmap gf <Action>(GotoFile)
+
+imap <C-j> <Action>(copilot.cycleNextInlays)
+imap <C-k> <Action>(copilot.cyclePrevInlays)
 
 map [[ <Action>(MethodUp)
 map ]] <Action>(MethodDown)
@@ -45,7 +52,6 @@ map <leader>r <Action>(RenameElement)
 map <leader>o <Action>(FileStructurePopup)
 map <leader>e <Action>(SelectInProjectView)
 map <leader>z <Action>(ToggleDistractionFreeMode)
-map <leader>d <Action>(QuickJavaDoc)
 map <leader>m <Action>(ExtractMethod)
 map <leader>a <Action>(ShowIntentionActions)
 
@@ -64,14 +70,10 @@ map <leader>pr <Action>($LRU)
 map > <Action>(EditorIndentSelection)
 map < <Action>(EditorUnindentSelection)
 
-"nnoremap ,t <Action>(ActivateDebugToolWindow)
-nmap ,d <Action>(ChooseDebugConfiguration)
-nmap ,f <Action>(ChooseRunConfiguration)
-nmap ,r <Action>(Rerun)
-nmap ,p <Action>(RunClass)
-nmap ,b <Action>(ToggleLineBreakpoint)
-nmap ,s <Action>(Stop)
-
+map <leader>dd <Action>(RunClass)
+map <leader>db <Action>(DebugClass)
+map <leader>dr <Action>(Rerun)
+map <leader>ds <Action>(ToggleLineBreakpoint)
 
 vmap sf <Action>(ReformatCode)
 
