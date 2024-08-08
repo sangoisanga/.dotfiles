@@ -32,6 +32,10 @@ alias gprm="git pull --rebase origin main"
 alias gs="git stash"
 alias gp="git stash pop"
 
+alias pre="go mod tidy && golangci-lint run --new-from-rev main"
+alias lint="golangci-lint run --new-from-rev main"
+alias gcia="gci write ./"
+
 #-------------------------------
 # Cake by VPBank
 #-------------------------------
@@ -154,16 +158,10 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/sang.duong/Documents/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sang.duong/Documents/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/sang.duong/Documents/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sang.duong/Documents/google-cloud-sdk/completion.zsh.inc'; fi
-
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
-autoload -U compinit; compinit
+#[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+#autoload -U compinit; compinit
 
 #-------------------------------
 # Znap and plugin
@@ -176,8 +174,15 @@ source ~/Repos/znap/znap.zsh  # Start Znap
 
 znap source marlonrichert/zsh-autocomplete
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # CodeWhisperer post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/sang.duong/Documents/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sang.duong/Documents/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/sang.duong/Documents/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sang.duong/Documents/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
